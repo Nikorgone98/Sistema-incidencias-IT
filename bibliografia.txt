@@ -1,0 +1,40 @@
+Bibliografía y Fuentes de Referencia para TuringHelpDesk
+Documentacion oficial de Ubuntu utilizada para la instalación, administración y configuración de Ubuntu Server.
+https://ubuntu.com/server/docs
+Documentacion oficial de Apache HTTP Server para configuracion del servidor web, certificados ssl y habilitación de https
+https://httpd.apache.org/docs/
+Documentacion oficial de PHP para formularios php, conexion a base de datos, desarrollo de la aplicación, gestión de usuarios y autenticación.
+https://www.php.net/docs.php
+Documentación oficial de MariaDB para crear los índices, procedimientos y vistas.
+https://mariadb.com/kb/en/documentation/
+MySQL Reference Manual para diseño de consultas sql y triggers y procedimientos.
+https://dev.mysql.com/doc/
+
+Manual oficial de OpenSSH para el acceso remoto seguro y la administración del servidor.
+https://www.openssh.com/manual.html
+Documentación oficial de OpenSSL para la creación de los certificados SSL autofirmados y la configuración de https.
+https://www.openssl.org/docs/
+GNU Bash Documentation para el desarrollo del script y las copias de seguridad
+https://www.gnu.org/software/bash/manual/
+
+Manuales y apuntes de todos los módulos de primero y segundo de ASIR para:
+Configuración de zonas DNS.
+Zona directa.
+Zona inversa.
+Resolución de nombres.
+Gestión de registros DNS.
+Configuración de asignación dinámica de direcciones.
+Configuración de gateway.
+Configuración de DNS.
+Gestión de concesiones DHCP.
+Desarrollo del script exportar.py.
+Manipulación de datos.
+Exportación de información.
+Gestión de tablas.
+Inserción de registros.
+Exportación de datos.
+Administración de usuarios.
+Lenguaje de marcas.
+
+Recursos Audiovisuales Utilizados
+https://www.youtube.com/watch?v=wq4S6BlIFmk
