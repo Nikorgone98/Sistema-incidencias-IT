@@ -1,0 +1,368 @@
+* {
+	box-sizzing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	background: #f4f7fb;
+	color: #1f2937;
+	font-size: 14px;
+}
+
+.container {
+	width: 95%;
+	margin: 25px auto;
+	background: #ffffff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+h1 {
+	font-size: 24px;
+	margin-bottom: 15px;
+	color: #1e3a5f;
+}
+
+h2 {
+	font-size: 18px;
+	margin-top: 25px;
+	color: #263f5e;
+}
+
+a {
+	color: #2563eb;
+	text-decoration: none;
+}
+
+
+a:hover {
+	text-decoration: underline;
+}
+
+
+.btn {
+	display: inline-block;
+	padding: 7px 12px;
+	border-radius: 4px;
+	background: #2563eb;
+	color: white;
+	border: none;
+	cursor: pointer;
+	font-size: 13px;
+}
+
+.btn:hover {
+	background: #1d4ed8;
+	text-decoration: none;
+}
+
+.btn-secondary {
+	background: #64748b;
+}
+
+
+.btn-danger {
+	background: #dc2626;
+}
+
+
+/*Tablas de los tipos de tickets*/
+
+.ticket-table{
+	width:100%;
+	border-collapse: collapse;
+	background: white;
+	font-size: 13px;
+}
+
+.ticket-table th {
+	background: #eef3f8;
+	color: #334155;
+	text-align: left;
+	padding: 9px;
+	border-bottom: 1px solid #cbd5e1;
+	font-weight: bold;
+}
+
+.ticket-table td {
+	padding: 8px 9px;
+	border-bottom: 1px solid #e5e7eb;
+	color: #334155;
+}
+
+
+.ticket-table tr:hover {
+	background: #f8fafc;
+}
+
+.ticket-id {
+	color: #2563eb;
+	font-weight: bold;
+}
+
+
+.priority-dot {
+	width: 11px;
+	height: 11px;
+	border-radius: 50%;
+	display: inline-block;
+	margin-right: 6px;
+}
+
+.priority-baja {
+	background: #22c55e;
+}
+
+.priority-media {
+	background: #eab308;
+}
+
+.priority-alta {
+	background: #f97316;
+}
+
+.priority-critica {
+	background: #dc2626;
+}
+
+.estado {
+	padding: 4px 8px;
+	border-radius: 12px;
+	background: #e2e8f0;
+	font-size: 12px;
+}
+
+.estado-abierta {
+	background: #dbeafe;
+	color: #1d4ed8;
+}
+
+.estado-curso {
+	background: #fef3c7;
+	color: #92400e;
+}
+
+.estado-resuelta {
+	background: #dcfce7;
+	color: #166534;
+}
+
+.estado-cerrada {
+	background: #e5e7eb;
+	color: #374151;
+}
+
+
+/*FORMULARIOS*/
+
+input,
+select
+textarea {
+	width: 100%;
+	max-width: 600px;
+	padding: 8px;
+	border: 1px solid #cbd5e1;
+	border-radius: 5px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+textarea {
+	resize: none;
+}
+
+/*Vista incidencia y chat de incidencia*/
+
+.ticket-layout {
+	display:grid;
+	grid-template-columns: 1fr 360px;
+	gap: 20px;
+	align-items: start;
+}
+
+.ticket-detail {
+	background: white;
+	padding: 20px;
+	border-radius: 8px;
+}
+
+.chat-panel {
+	background: #efeae2;
+	border-radius: 8px;
+	padding: 15px;
+	min-heigth: 500px;
+	max-heigth: 650px;
+	overflow-y: auto;
+	border: 1px solid #ddd;
+}
+
+.chat-message {
+	max-width: 85%;
+	margin-bottom: 12px;
+	padding: 9px 11px;
+	border-radius: 8px;
+	font-size: 13px;
+	line-height: 1.4;
+	clear: both;
+}
+
+.chat-own {
+	background: #d9fdd3;
+	margin-left: auto;
+}
+
+.chat-other {
+	background: #ffffff;
+	margin-right: auto;
+}
+
+.chat-meta {
+	font-size: 11px;
+	color: #64748b;
+	margin-bottom: 4px;
+}
+
+.chat-form textarea {
+	width: 100%;
+	heigth: 80px;
+	resize: none;
+}
+
+.chat-closed {
+	background: #fee2e2;
+	color: #991b1b;
+	padding: 10px;
+	border-radius: 6px;
+	font-weight: bold;
+}
+
+.dashboard-grid{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 15px;
+	margin: 20px 0;
+}
+
+.dashboard-card {
+	background: #ffffff;
+	border: 1px solid #dbe3ec;
+	border-radius: 8px;
+	padding: 18px;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.dashboard-card h3 {
+	margin: 0 0 8px 0;
+	color: #1e3a5f;
+}
+
+.dashboard-card p {
+	margin: 0 0 12px 0;
+	color: #64748b;
+}
+
+.stat-number {
+	font-size: 28px;
+	font-weight: bold;
+	color: #2563eb;
+}
+
+
+.form-card {
+	max-width: 800px;
+	margin: 30px auto;
+	background: white;
+	padding: 25px;
+	border-radius: 10px;
+	border: 1px solid #dbe3ec;
+	box-shadow. 0 2px 8px rgba(0,0,0,.08);
+}
+
+.form-card h1 {
+	margin-top: 0;
+}
+
+.form-group {
+	margin-bottom: 18px;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 6px;
+	font-weight: bold;
+}
+
+.success-message {
+	background: #dcfce7;
+	color: #166534;
+	padding: 10px;
+	border-radius: 6px;
+	margin-bottom: 15px;
+}
+
+.login-wrapper {
+	display: flex;
+	justify-content: center;
+	margin-top: 60px;
+}
+
+.login-card {
+	width: 100%;
+	max-width: 500px;
+	background: white;
+	padding: 30px;
+	border-radius: 10px;
+	border: 1px solid #dbe3ec;
+	box-shadow: 0 2px 8px rgba(0,0,0,.08);
+	height: fit-content;
+}
+
+.login-card h1 {
+	margin-top: 0;
+	text-align: center;
+	color: #1e3a5f;
+}
+
+.error-message {
+	background: #fee2e2;
+	color: #991b1b;
+	padding: 10px;
+	border-radius: 6px;
+	margin-bottom: 15px;
+}
+
+.login-card input {
+	width: 100%;
+	box-sizzing: border-box;
+}
+
+.stats-grid {
+	display grid
+	grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+	gap: 15px;
+	margin: 20px 0;	
+}
+
+.stat-card {
+	background: white;
+	border-radius: 10px;
+	padding: 20px;
+	border: 1px solid #dbe3ec;
+	box-shadow: 0 2px 6px rgba(0,0,0,.06);	
+	text-allign:center;
+}
+
+.stat-card h3 {
+	margin: 0;
+	font-size: 16px;
+	color: #64748b;
+
+}
+
+.stat-value {
+	font-size: 32px;
+	font-weight: bold;
+	margin-top: 10px;
+	color: #1e3a5f;
+}
