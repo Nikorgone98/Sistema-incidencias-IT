@@ -1,15 +1,15 @@
 <?php
-
+/* Verifica la sesión activa y carga la conexión a la base de datos */
 require_once '../includes/auth.php';
 require_once '../config/database.php';
-
+/* Comprueba que se ha recibido una incidencia por URL */
 if (!isset($_GET['id']))
 {
 	die("Incidencia no especificada");
 }
 
 $id = (int) $_GET['id'];
-
+/* Procesa el envío de un nuevo comentario */
 if ($_SERVER['REQUEST_METHOD'] === 'POST'
     &&
     isset($_POST['comentario'])
@@ -40,7 +40,7 @@ $stmtInsert->execute([
 header("Location: ver.php?id=" . $id);
 exit();
 }
-
+/* Procesa el cambio de estado realizado por el administrador */
 if($_SERVER['REQUEST_METHOD'] === 'POST'
    &&
    isset($_POST['cambiar_estado'])
@@ -130,7 +130,7 @@ header("Location: ver.php?id=" . $id);
 exit();
 }
 
-
+/* Carga los datos principales de la incidencia */
 $sql = " SELECT
 	i.*,
 	u.nombre AS usuario,
@@ -154,13 +154,13 @@ $stmt = $conexion->prepare($sql);
 $stmt->execute([ 'id' => $id]);
 
 $incidencia = $stmt->fetch(PDO::FETCH_ASSOC);
-
+/* Comprueba si la incidencia está cerrada */
 $incidenciaCerrada =
 (
 	$incidencia['id_estado'] == 4
 );
 
-
+/* Carga el historial de comentarios */
 $sqlComentarios = "
 	SELECT c.*, u.nombre
 	FROM comentarios c
@@ -172,7 +172,7 @@ $sqlComentarios = "
 $stmtComentarios = $conexion->prepare($sqlComentarios);
 $stmtComentarios ->execute(['id' => $id]);
 $comentarios = $stmtComentarios->fetchAll(PDO::FETCH_ASSOC);
-
+/* Valida que la incidencia exista */
 if (!$incidencia)
 {
 	die("Incidencia no encontrada");
@@ -213,7 +213,7 @@ if (!$incidencia)
 
 		<p>
 			<strong>Estado:</strong>
-			<?php
+			<?php /* Prepara clase CSS para el estado */
 			$estadoClase = strtolower($incidencia['nombre_estado']);
 
 				if ($estadoClase == 'en curso') { $estadoClase = 'curso'; }
@@ -226,7 +226,8 @@ if (!$incidencia)
 		<p>
 			<strong>Prioridad:</strong>
 
-			<?php $prioridadClase = strtolower($incidencia['nombre_prioridad']);
+			<?php /* Prepara clase CSS para la prioridad */
+				$prioridadClase = strtolower($incidencia['nombre_prioridad']);
 
 				if ($prioridadClase == 'crítica') {$prioridadClase = 'critica'; }?>
 
@@ -246,7 +247,7 @@ if (!$incidencia)
 		</p>
 
 		<hr>
-<!-- Aqui va la descripción -->
+<!-- Aqui va la descripción de la incidencia -->
 
 		<h2>Descripción<h2>
 
@@ -290,7 +291,7 @@ if (!$incidencia)
 
 		<br><br>
 
-<!-- VOLVER -->
+<!-- VOLVER AL DASHBOARD-->
 		<a href="../dashboard.php">
 			Volver al panel
 		</a>
@@ -306,7 +307,7 @@ if (!$incidencia)
 
 		<?php foreach($comentarios as $comentario): ?>
 
-			<?php
+			<?php /* Esto define el estilo del mensaje según el usuario */
 			$claseMensaje =
 				($comentario['id_usuario'] == $_SESSION['usuario_id'])
 				? 'chat-own' : 'chat-other'; ?>
