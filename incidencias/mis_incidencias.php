@@ -1,8 +1,8 @@
 <?php
-
+/* Verifica la sesión activa y carga la conexión a la base de datos */
 require_once '../includes/auth.php';
 require_once '../config/database.php';
-
+/* Obtiene únicamente las incidencias creadas por el usuario autenticado */
 $sql = " SELECT
 	i.id_incidencia,
 	i.titulo,
@@ -36,7 +36,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
 <h1>Mis incidencias</h1>
-
+<!-- Tabla con las incidencias del usuario -->
 <table class="ticket-table">
 
 <tr>
@@ -61,7 +61,9 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<?php echo $incidencia['titulo']; ?>
 	</td>
 
-	<td> <?php $estadoClase = strtolower($incidencia['nombre_estado']);
+	<td> <?php 
+	/* Prepara la clase CSS para el estado */
+		$estadoClase = strtolower($incidencia['nombre_estado']);
 		if ($estadoClase == 'en curso') {
 		    $estadoClase = 'curso';
 		}?>
@@ -70,7 +72,9 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		</span>
 	</td>
 
-	<td> <?php $prioridadClase = strtolower($incidencia['nombre_prioridad']);
+	<td> <?php 
+	/* Prepara clase CSS para la prioridad */
+		$prioridadClase = strtolower($incidencia['nombre_prioridad']);
 		if ($prioridadClase == 'crítica') {
 		    $prioridadClase = 'critica';
 		}?>
@@ -86,7 +90,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </table>
 <br>
-
+<!-- Enlace de retorno al dashboard -->
 <a href="../dashboard.php"> Volver al panel</a>
 </body>
 </html>
