@@ -1,8 +1,9 @@
 <?php
+/* Verifica autenticación y carga conexión a la base de datos */
 
 require_once 'includes/auth.php';
 require_once 'config/database.php';
-
+/* Obtener número total de incidencias */
 $sqlTotal = "
 	SELECT COUNT(*) total
 	FROM incidencias";
@@ -60,7 +61,7 @@ $stmtCerradas = $conexion->query($sqlCerradas);
 $cerradas =
 $stmtCerradas->fetch(PDO::FETCH_ASSOC);
 
-/*Obtener ultimas incidencias*/
+/* Obtener las últimas incidencias registradas */
 
 $sqlUltimas = "
 	SELECT
@@ -85,7 +86,7 @@ $stmtUltimas = $conexion->query($sqlUltimas);
 $ultimasIncidencias =
 $stmtUltimas->fetchAll(PDO::FETCH_ASSOC);
 
-/*Obtener incidencias por categoria*/
+/* Obtener incidencias agrupadas por categoría */
 
 $sqlCategorias = "
 	SELECT
@@ -114,10 +115,11 @@ $stmtCategorias->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
+<!-- Contenedor principal del dashboard -->
 <div class="container">
 
 <h1>TuringHelpDesk</h1>
-
+<!-- Información del usuario autenticado -->
 <p>
 Bienvenido
 <?php
@@ -131,11 +133,11 @@ Rol:
 echo $_SESSION ['rol'];
 ?>
 </p>
-
+<!-- Panel exclusivo para administradores -->
 <?php if ($_SESSION['rol'] == 'admin'): ?>
 
 <h2> Estadísticas Generales</h2>
-
+<!-- Resumen global de incidencias -->
 <div class="stats-grid">
 
 <div class="stat-card">
@@ -175,7 +177,7 @@ echo $_SESSION ['rol'];
 </div>
 
 </div>
-
+<!-- Tabla con las últimas incidencias registradas -->
 <h2>Últimas incidencias</h2>
 
 <table border="1">
@@ -204,7 +206,7 @@ echo $_SESSION ['rol'];
 
 </table>
 
-<hr>
+<hr><!-- Estadísticas por categoría -->
 <h2>Incidencias por Categoria</h2>
 
 <table border="1">
@@ -222,7 +224,7 @@ echo $_SESSION ['rol'];
 
 <?php endforeach; ?>
 </table>
-
+<!-- Accesos rápidos de administración -->
 <div class="dashboard-grid">
 
 	<div class="dashboard-card">
@@ -250,7 +252,7 @@ echo $_SESSION ['rol'];
 </div>
 
 <?php endif; ?>
-
+<!-- Panel exclusivo para profesores -->
 <?php if($_SESSION['rol'] == 'usuario'): ?>
 <h2> Panel Usuario</h2>
 
@@ -280,7 +282,7 @@ echo $_SESSION ['rol'];
 <?php if($_SESSION['rol'] == 'admin'): ?>
 <?php endif; ?>
 <br><br>
-
+<!-- Cierre de sesión -->
 <a href="logout.php">
 	Cerrar sesión
 </a>
