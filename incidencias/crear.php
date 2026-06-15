@@ -1,16 +1,17 @@
 <?php
+/* Verifica la sesión activa y carga la conexión a la base de datos */
 require_once '../includes/auth.php';
 require_once '../config/database.php';
 
 $mensaje = "";
-
+/* Procesa el formulario de creación de incidencia */
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	$titulo = trim($_POST['titulo']);
 	$descripcion = trim($_POST['descripcion']);
 	$categoria = $_POST['categoria'];
 	$prioridad = $_POST['prioridad'];
-
+/* Inserta la nueva incidencia asociada al usuario autenticado */
 	$sql = "
 		INSERT INTO incidencias
 		(
@@ -54,13 +55,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 </head>
 
 <body>
-
+<!-- Contenedor principal -->
 <div class="container">
 
 <div class="form-card">
 
 <h1>Nueva Incidencia</h1>
-
+<!-- Mensaje de confirmación -->
 <?php if ($mensaje): ?>
 
 <div class="success-message">
@@ -70,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 <?php endif; ?>
 
 
-
+<!-- Formulario de creación de incidencia -->
 <form method="POST">
 
 	<div class="form-group">
@@ -112,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	</form>
 
 	<br>
-
+<!-- Enlace de retorno al dashboard -->
 	<a href="../dashboard.php">Volver al panel</a>
 
 	</div>
