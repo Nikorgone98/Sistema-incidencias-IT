@@ -1,13 +1,14 @@
 <?php
+/* Verifica la sesión activa y carga la conexión a la base de datos */
 require_once '../includes/auth.php';
 require_once '../config/database.php';
 
-
+/* Restringe acceso a todo los usuarios que no sean administradores */
 if ($_SESSION["rol"] != "admin")
 {
 	die("Acceso denegado");
 }
-
+/* Comprueba que se ha recibido una incidencia por URL */
 if(!isset($_GET['id']))
 {
 	die("Incidencia no especificada");
@@ -15,7 +16,7 @@ if(!isset($_GET['id']))
 $id = (int) $_GET['id'];
 
 
-/*Carga de la incidencia*/
+/* Carga los datos actuales de la incidencia */
 
 	$sql = "
 		SELECT * FROM incidencias
@@ -29,11 +30,12 @@ $id = (int) $_GET['id'];
 	]);
 
 	$incidencia = $stmt->fetch(PDO::FETCH_ASSOC);
+/* Valida que la incidencia existe */
 	if(!$incidencia)
 	{
 	die("Incidencia no encontrada");
 	}
-
+/* Bloquea la edición si la incidencia está cerrada */
 	if($incidencia['id_estado'] == 4)
 	{
 	die("La incidencia está cerrada y no puede modificarse.");
@@ -42,7 +44,9 @@ $id = (int) $_GET['id'];
 /*Aqui se procesa la actualizacion de la incidencia*/
 
 if($_SERVER['REQUEST_METHOD'] === 'POST')
-{	$tituloAnterior = $incidencia['titulo'];
+{	
+	/* Se guardan los valores anteriores para registrar cambios */
+	$tituloAnterior = $incidencia['titulo'];
 	$descripcionAnterior = $incidencia['descripcion'];
 	$prioridadAnterior = $incidencia['prioridad'];
 	$categoriaAnterior = $incidencia['categoria'];
@@ -52,7 +56,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	$categoria =(int)$_POST['categoria'];
 	$cambios = [];
 
-/*Esto sirve para detectar modificaciones*/
+/*Esto sirve para detectar cambios realizados por el administrador */
 
 if($tituloAnterior != $titulo)
 {
@@ -80,7 +84,7 @@ if($categoriaAnterior != $categoria)
 	"Administrador modificó la categoría";
 }
 
-
+/* Actualiza los datos principales de la incidencia */
 	$sqlUpdate = "
 	UPDATE incidencias
 	SET
@@ -100,7 +104,7 @@ if($categoriaAnterior != $categoria)
 		'categoria' => $categoria,
 		'id' => $id
 	]);
-
+/* Se registran en comentarios los cambios realizados */
 	foreach($cambios as $mensaje)
 	{
 		$sqlComentario ="
@@ -117,7 +121,7 @@ if($categoriaAnterior != $categoria)
 	]);
 	}
 
-
+/* Se vuelve a la vista principal de la incidencia */
 	header("Location: ver.php?id=".$id);
 	exit();
 }
@@ -133,14 +137,14 @@ if($categoriaAnterior != $categoria)
 </head>
 
 <body>
-
+<!-- Contenedor principal -->
 <div class="container">
 
 <div class="form-card">
 
 <h1>Editar Incidencia</h1>
 
-
+<!-- Formulario de edición -->
 <form method="POST">
 	<div class="form-group">
 	<label>Título</label>
@@ -195,7 +199,7 @@ if($categoriaAnterior != $categoria)
 </form>
 
 <br>
-
+<!-- Volver a la vista principal de la incidencia -->
 	<a href="ver.php?id=<?php echo $id; ?>">Volver</a>
 
 	</div>
