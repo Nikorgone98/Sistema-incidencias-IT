@@ -1,15 +1,15 @@
 <?php
-
+/* Carga la conexión a base de datos y gestión de sesiones */
 require_once 'config/database.php';
 require_once 'includes/session.php';
 
 $error = "";
-
+/* Procesa el formulario de inicio de sesión */
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	$email = $_POST['email'];
 	$password = $_POST['password'];
-
+/* Busca el usuario por correo electrónico */
 	$sql = "
 		SELECT *
 		FROM usuarios
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	$stmt->execute([ 'email' => $email]);
 
 	$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-
+/* Valida las credenciales y crea la sesión */
 	if (
 	    $usuario &&
 	    password_verify(
@@ -38,12 +38,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 	    $_SESSION['rol']
 		= $usuario['rol'];
-
+/* Redirige al panel principal */
 	    header(
 		"Location: dashboard.php"
 	    );
 	    exit();
-	}
+	}/* Muestra error si las credenciales no son válidas */
 	else
 	{
 	    $error =
@@ -63,13 +63,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 </head>
 
 <body>
-
+<!-- Contenedor principal del formulario -->
 <div class="login-wrapper">
 
 <div class="login-card">
 
 <h1>TuringHelpDesk</h1>
-
+<!-- Mensaje de error de autenticación -->
 <?php if($error): ?>
 
 <div class="error-message">
@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 </div>
 
 <?php endif; ?>
-
+<!-- Formulario de inicio de sesión -->
 <form method="POST">
 
 	<div class="form-group">
