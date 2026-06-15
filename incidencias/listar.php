@@ -1,13 +1,13 @@
 <?php
-
+/* Verifica la sesión activa y carga la conexión a la base de datos */
 require_once '../includes/auth.php';
 require_once '../config/database.php';
-
+/* Restringe el listado completo para que solo puedan verlo los administradores */
 if ($_SESSION['rol'] != 'admin')
 {
 	die("Acceso denegado");
 }
-
+/* Obtiene todas las incidencias con usuario, estado y prioridad */
 $sql = " SELECT
 	i.id_incidencia,
 	i.titulo,
@@ -40,7 +40,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
 <h1>Todas las incidencias</h1>
-
+<!-- Tabla principal de incidencias -->
 <table class="ticket-table">
 
 <tr>
@@ -67,6 +67,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<td> <?php echo $incidencia['usuario']; ?> </td>
 
 	<td> <?php
+		/* Prepara clase CSS para el estado */
 		$estadoClase = strtolower($incidencia['nombre_estado']);
 		if ($estadoClase == 'en curso') {
 		    $estadoClase = 'curso';
@@ -77,6 +78,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	<td>
 		<?php
+		/* Prepara clase CSS para la prioridad */
 		$prioridadClase = strtolower($incidencia['nombre_prioridad']);
 		if ($prioridadClase == 'crítica') {
 		    $prioridadClase = 'critica';
@@ -96,7 +98,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </table>
 <br>
-
+<!-- Enlace de retorno al dashboard -->
 <a href="../dashboard.php"> Volver al panel</a>
 </body>
 </html>
